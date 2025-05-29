@@ -1,0 +1,122 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 260 25% 98%;
+    --foreground: 260 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 260 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 10% 10%;
+
+    --primary: 262 47% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 260 10% 90%;
+    --secondary-foreground: 260 10% 10%;
+
+    --muted: 260 10% 96%;
+    --muted-foreground: 260 5% 45%;
+
+    --accent: 42 87% 55%;
+    --accent-foreground: 260 10% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 260 10% 90%;
+    --input: 260 10% 90%;
+    --ring: 260 47% 55%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 262 47% 20%;
+    --sidebar-foreground: 260 10% 98%;
+    --sidebar-primary: 42 87% 55%;
+    --sidebar-primary-foreground: 260 10% 10%;
+    --sidebar-accent: 262 30% 30%;
+    --sidebar-accent-foreground: 260 10% 98%;
+    --sidebar-border: 262 30% 25%;
+    --sidebar-ring: 262 47% 55%;
+  }
+
+  .dark {
+    --background: 260 15% 10%;
+    --foreground: 260 10% 98%;
+
+    --card: 260 15% 12%;
+    --card-foreground: 260 10% 98%;
+
+    --popover: 260 15% 12%;
+    --popover-foreground: 260 10% 98%;
+
+    --primary: 262 47% 65%;
+    --primary-foreground: 260 10% 10%;
+
+    --secondary: 260 10% 20%;
+    --secondary-foreground: 260 10% 98%;
+
+    --muted: 260 10% 20%;
+    --muted-foreground: 260 10% 70%;
+
+    --accent: 42 87% 45%;
+    --accent-foreground: 260 10% 10%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 260 10% 98%;
+
+    --border: 260 10% 20%;
+    --input: 260 10% 20%;
+    --ring: 262 47% 65%;
+
+    --sidebar-background: 262 47% 15%;
+    --sidebar-foreground: 260 10% 98%;
+    --sidebar-primary: 42 87% 55%;
+    --sidebar-primary-foreground: 260 10% 10%;
+    --sidebar-accent: 262 30% 25%;
+    --sidebar-accent-foreground: 260 10% 98%;
+    --sidebar-border: 262 30% 20%;
+    --sidebar-ring: 262 47% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .stat-card {
+    @apply p-6 rounded-lg bg-card shadow-sm border flex flex-col;
+  }
+  
+  .stat-title {
+    @apply text-sm font-medium text-muted-foreground mb-1;
+  }
+  
+  .stat-value {
+    @apply text-2xl font-bold;
+  }
+  
+  .stat-description {
+    @apply text-xs text-muted-foreground mt-2;
+  }
+  
+  .table-container {
+    @apply w-full overflow-hidden border rounded-lg;
+  }
+  
+  .form-container {
+    @apply space-y-6 p-6 bg-card rounded-lg border;
+  }
+}

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            background-color: #f4f4f4;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #f8f9fa;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center my-4">Admin Dashboard</h1>
+
+        <!-- Sales Overview Section -->
+        <div class="row">
+            <!-- Sales by Month (Yearly View) -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Total Sales by Month</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Year Selector -->
+                        <div class="mb-3">
+                            <label for="yearSelect" class="form-label">Select Year</label>
+                            <select id="yearSelect" class="form-select" onchange="updateYearlySales()">
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                            </select>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="salesByMonthChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales by Day (Monthly View) -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Daily Sales in Selected Month</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Month Selector -->
+                        <div class="mb-3">
+                            <label for="monthSelect" class="form-label">Select Month</label>
+                            <select id="monthSelect" class="form-select" onchange="updateDailySales()">
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                            </select>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="salesByDayChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales by Year Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Total Sales by Year</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="salesByYearChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Section -->
+        <div class="card">
+            <div class="card-header">
+                <h4>Inventory Management</h4>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="inventoryAccordion">
+
+                    <!-- Category: Sarees -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSarees">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSarees" aria-expanded="true" aria-controls="collapseSarees">
+                                Sarees
+                            </button>
+                        </h2>
+                        <div id="collapseSarees" class="accordion-collapse collapse show" aria-labelledby="headingSarees" data-bs-parent="#inventoryAccordion">
+                            <div class="accordion-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Stock</th>
+                                            <th>Sold</th>
+                                            <th>Total Sales</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Silk Saree Red</td>
+                                            <td>100</td>
+                                            <td>50</td>
+                                            <td>$2500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cotton Saree Blue</td>
+                                            <td>120</td>
+                                            <td>30</td>
+                                            <td>$1200</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Blouses -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingBlouses">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBlouses" aria-expanded="false" aria-controls="collapseBlouses">
+                                Blouses
+                            </button>
+                        </h2>
+                        <div id="collapseBlouses" class="accordion-collapse collapse" aria-labelledby="headingBlouses" data-bs-parent="#inventoryAccordion">
+                            <div class="accordion-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Stock</th>
+                                            <th>Sold</th>
+                                            <th>Total Sales</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Designer Blouse</td>
+                                            <td>200</td>
+                                            <td>120</td>
+                                            <td>$3000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Kurtas -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingKurtas">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKurtas" aria-expanded="false" aria-controls="collapseKurtas">
+                                Kurtas
+                            </button>
+                        </h2>
+                        <div id="collapseKurtas" class="accordion-collapse collapse" aria-labelledby="headingKurtas" data-bs-parent="#inventoryAccordion">
+                            <div class="accordion-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Stock</th>
+                                            <th>Sold</th>
+                                            <th>Total Sales</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Casual Kurta</td>
+                                            <td>150</td>
+                                            <td>75</td>
+                                            <td>$1500</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap and JS libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const salesData = {
+            '2023': {
+                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                monthlySales: [1200, 1600, 1500, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500],
+            },
+            '2024': {
+                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                monthlySales: [1300, 1800, 1700, 2000, 2300, 2200, 2100, 2000, 2100, 2200, 2300, 2500],
+            },
+            '2025': {
+                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                monthlySales: [1500, 2000, 1800, 2200, 2500, 2400, 2300, 2100, 2200, 2400, 2500, 2700],
+            }
+        };
+
+        const dailySalesData = {
+            '5': Array(31).fill(0).map(() => Math.floor(Math.random() * 300)),
+            '6': Array(30).fill(0).map(() => Math.floor(Math.random() * 300)),
+            '7': Array(31).fill(0).map(() => Math.floor(Math.random() * 300)),
+            '8': Array(31).fill(0).map(() => Math.floor(Math.random() * 300)),
+        };
+
+        // Sales by Month Chart
+        const ctxMonth = document.getElementById('salesByMonthChart').getContext('2d');
+        const salesByMonthChart = new Chart(ctxMonth, {
+            type: 'bar',
+            data: {
+                labels: salesData['2025'].months,
+                datasets: [{
+                    label: 'Sales by Month',
+                    data: salesData['2025'].monthlySales,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Sales by Day Chart
+        const ctxDay = document.getElementById('salesByDayChart').getContext('2d');
+        let salesByDayChart = new Chart(ctxDay, {
+            type: 'bar',
+            data: {
+                labels: Array.from({ length: 31 }, (_, i) => i + 1),
+                datasets: [{
+                    label: 'Sales by Day',
+                    data: dailySalesData['5'],
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Total Sales by Year Chart
+        const totalYearlySalesData = {
+            years: ['2023', '2024', '2025'],
+            sales: [
+                salesData['2023'].monthlySales.reduce((a, b) => a + b, 0),
+                salesData['2024'].monthlySales.reduce((a, b) => a + b, 0),
+                salesData['2025'].monthlySales.reduce((a, b) => a + b, 0)
+            ]
+        };
+
+        const ctxYear = document.getElementById('salesByYearChart').getContext('2d');
+        const salesByYearChart = new Chart(ctxYear, {
+            type: 'bar',
+            data: {
+                labels: totalYearlySalesData.years,
+                datasets: [{
+                    label: 'Total Sales by Year',
+                    data: totalYearlySalesData.sales,
+                    backgroundColor: 'rgba(255, 159, 64, 0.6)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function updateYearlySales() {
+            const year = document.getElementById('yearSelect').value;
+            salesByMonthChart.data.labels = salesData[year].months;
+            salesByMonthChart.data.datasets[0].data = salesData[year].monthlySales;
+            salesByMonthChart.update();
+        }
+
+        function updateDailySales() {
+            const month = document.getElementById('monthSelect').value;
+            salesByDayChart.data.datasets[0].data = dailySalesData[month];
+            salesByDayChart.update();
+        }
+    </script>
+
+</body>
+
+</html>
